@@ -20,7 +20,9 @@ After implemented the draw bounding boxes for the ground truth classes, I have l
 ![image](https://github.com/ghost-qb/SDE_Object_Detection/assets/58492405/65dab4dc-e692-42d6-b46a-1a8ad7534497)
 
 From the display sample images, most of the objects appear to be occluded. Therefore, adding occlusions as an data augmentation method would be beneficial for better performance.
+
 ![image](https://github.com/ghost-qb/SDE_Object_Detection/assets/58492405/73a7f55c-72d9-49a9-83c6-a4d16709839d)
+
 ![image](https://github.com/ghost-qb/SDE_Object_Detection/assets/58492405/c741da16-c3cd-407f-bf85-abe4a7262eab)
 
 ## Additional EDA
