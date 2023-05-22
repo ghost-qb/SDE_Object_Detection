@@ -46,8 +46,51 @@ The Classification Loss and Localization Loss oscillated and never become logari
 ## Improve On Reference Experiment
 I have made multiple changes in the training configurations to improve the training. The first change is the optimizer. Instead of using the momentum optimizer I have chosen to use ADAM optimizer because Adam doesn’t roll so fast after jumping over the minimum but decreasing the velocity a little bit for carefully search. I also have different learning rates at different step in the training; details can be found in the pipeline_new.config. Furthermore, I have included two more data augmentation methods: random black patches and random color distort. These two data augmentations are chosen due to the discovery that the objects in the training data usually being occluded; and for some sample data, the rain has distort the color of the objects. The results of the improvement can be found in the Loss graphs below (with highlighted ‘improve on reference’ to indicate the new experiment and the others were the initial experiment losses) 
 
-<img width="358" alt="image" src="https://github.com/ghost-qb/SDE_Object_Detection/assets/58492405/9373d8a7-24bd-4a5e-98c6-f279a6c96774">
+### Data Augmentation
+  data_augmentation_options {
+  	random_black_patches {
+    	probability: 0.7
+    }
+  }
+  data_augmentation_options {
+  	random_distort_color {
+    }
+  }
+  data_augmentation_options {
+    random_horizontal_flip {
+    }
+  }
+  data_augmentation_options {
+    random_crop_image {
+      min_object_covered: 0.0
+      min_aspect_ratio: 0.75
+      max_aspect_ratio: 3.0
+      min_area: 0.75
+      max_area: 1.0
+      overlap_thresh: 0.0
+    }
+### Different Optimizer
+    adam_optimizer: {
+      learning_rate: {
+        manual_step_learning_rate {
+          initial_learning_rate: .0002
+          schedule {
+            step: 600
+            learning_rate: .0001
+          }
+          schedule {
+            step: 1000
+            learning_rate: .00008
+          }
+          schedule {
+            step: 2000
+            learning_rate: .00004
+          }
+        }
+      }
+![Screen Shot 2023-05-22 at 1 43 47 PM](https://github.com/ghost-qb/SDE_Object_Detection/assets/58492405/30ff68a8-8534-479d-a5c8-6abb0d83b702)
+![Screen Shot 2023-05-22 at 1 42 03 PM](https://github.com/ghost-qb/SDE_Object_Detection/assets/58492405/3a007cae-34fe-4504-b502-8f48497fee44)
+![Screen Shot 2023-05-22 at 1 41 52 PM](https://github.com/ghost-qb/SDE_Object_Detection/assets/58492405/ba06f704-1365-432f-97f5-5c1007aedac3)
 
-![image](https://github.com/ghost-qb/SDE_Object_Detection/assets/58492405/54e26186-9faf-414c-b38d-aea1e55669fc)
 
-![image](https://github.com/ghost-qb/SDE_Object_Detection/assets/58492405/0d97ce33-c526-4be6-85c5-7e4eb0d228fb)
+      
