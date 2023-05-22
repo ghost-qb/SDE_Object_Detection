@@ -49,7 +49,7 @@ The Classification Loss and Localization Loss oscillated and never become logari
 I have made multiple changes in the training configurations to improve the training. The first change is the optimizer. Instead of using the momentum optimizer I have chosen to use ADAM optimizer because Adam doesn’t roll so fast after jumping over the minimum but decreasing the velocity a little bit for carefully search. I also have different learning rates at different step in the training; details can be found in the pipeline_new.config. Furthermore, I have included two more data augmentation methods: random black patches and random color distort. These two data augmentations are chosen due to the discovery that the objects in the training data usually being occluded; and for some sample data, the rain has distort the color of the objects. The results of the improvement can be found in the Loss graphs below (with highlighted ‘improve on reference’ to indicate the new experiment and the others were the initial experiment losses) 
 
 ### Data Augmentation
-  {
+  ```
   data_augmentation_options {
   	random_black_patches {
     	probability: 0.7
@@ -72,7 +72,7 @@ I have made multiple changes in the training configurations to improve the train
       max_area: 1.0
       overlap_thresh: 0.0
     }
-   }
+  ```
 ### Different Optimizer
     adam_optimizer: {
       learning_rate: {
